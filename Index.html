@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Include the Google CSS package -->
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+<!-- Include CSS for custom alert dialogs -->
+<link rel="stylesheet" type="text/css" href="https://91c55625718363594154e49f236374eb2534752b.googledrive.com/host/0B5AyXtIwimFRbVdJZWt0OFoyOUU/sweetalert.css">
+
+  
+   
+  <!-- CSS styles -->
+  <style>
+    
+    label { font-size:.9em }
+    address { margin:0 0 0 20px }
+    input {  } 
+    div { padding-left: 20px}
+    div.file { margin: 0 0 0 0  }
+    .inputError { border-color: red !important}
+    h1 { font-size:2em; font-weight: bold }
+    .banner { font-size:1.5em; color:white; background-color: #c95648; padding:5px; font-weight:bold; border-radius:5px; }
+    h3 { font-size:1.25em; margin:10px 0 0 0; }
+    h4 { font-size:1em; margin: 10px 0 0 0; font-weight:bold; color:#555 }
+    p { font-size:1em; margin:0; }
+    select { margin:0 10px 0 0 }
+    .grey select {    background: url("https://ssl.gstatic.com/ui/v1/disclosure/grey-disclosure-arrow-up-down.png") , -webkit-linear-gradient(top , #CCCCCC , #CBCBCB);
+                      background-position: 95% 50%;
+                      background-repeat: no-repeat;
+                      background-image: url("https://ssl.gstatic.com/ui/v1/disclosure/grey-disclosure-arrow-up-down.png"), -moz-linear-gradient(center top , #CCCCCC, #CBCBCB);}
+    td { padding: 5px 10px; }
+    
+    .red { background-color: #c95648 }
+    .blue { background-color: #3c9ddc }
+    .purple { background-color: #ba68c8 }
+    .orange { background-color: #ffab40 }
+    .cyan { background-color: #00bcd4 }
+    .inline { margin-left:0}
+    .fileUploadLabel { font-weight:bold; color:#3079ED; margin-top:2em }
+    .formSection { margin:10px; padding:10px; border: 1px solid #ddd; border-radius:5px }
+    .subSection { margin:10px 20px; padding:10px; border-radius:5px }
+    .grey { background-color:#f3f3f3 }
+    .greyBg { background-color:#f3f3f3 }
+    .parent {  }
+    .sex { margin-top:10px }
+    .weekdayBox { margin-right:15px }
+    .weekdayDiv { margin-top:14px }
+    .days { text-align:center }
+    .times { text-align: center; background-color:#ddd; padding:10px; border-radius:5px }
+    .living { margin-right:10px }
+    .sendMailingsLabel { margin-right:20px }
+    .communicateEnglishDiv { margin-top:20px }
+    .inlineRadio { margin-right:8px}
+    input[type=checkbox] { border: 1px solid #c6c6c6 }
+    input[type=radio] { border: 1px solid #c6c6c6 }
+    
+    #callToAction { padding:20px; background-color:#f3f3f3; border-radius:5px; margin:20px; }
+    #medicalDisclaimer { margin: 15px 0 0 0; }
+    #wrapper { width:55%; width:680px; margin: 0 auto 60px auto; }
+    #uploadSection { padding:20px }
+    #diseaseDiv { margin:20px 0 }
+    #banner { margin-top:20px }
+    #title { text-align:center }
+    
+    
+</style>
+  </head>
+  <body>
+  
+
+  
+  
+  <div id="wrapper">
+    <img id="banner" src="https://i.imgur.com/u2j760d.jpg" alt="Harmony Project">
+    <h1 id="title">Enroll</h1>
+    <h2>2.0</h2>
+    <img src="https://i.imgur.com/olZor9b.png" width="30" height="30">
+    <select id="languageSelect" onchange="changeLanguage(this.value);">
+      <option value="english" selected="selected">English</option>
+      <option value="spanish">Español</option>
+    </select>
+    <!-- Begin hidden call to action on form submjt -->
+    <div id="callToAction" style="display:none">
+      <h3 id="thankYouBlurb">Thank you for your application! We'll be in contact soon.</h3>
+      <!-- uncomment when parent surveys are online 
+      <p>
+      If your child has previously been enrolled in Harmony Project, please take our <a href="http://www.harmony-project.org">Parent Survey</a>
+      </p>
+      -->
+      <p id="submitAnotherChild">
+      If you would like to submit an application for another child, please reload this page.
+      </p>
+    </div>
+    <!-- End hidden call to action on form submit -->
+ 
+    <!-- Begin Form -->
+    <form id="enrollmentForm">
+
+    
+    <!-- Begin Student Info -->
+        <div id="studentInfoDiv" class="formSection">
+        
+            <h2 id="studentInfoHeader" class="red banner">Student Information</h2>
+            <div class="inline form-group">
+              <label for="studentFirstName" class="firstName">First Name</label>
+              <input type="text" name="firstName" class="required" size="" placeholder="" required>
+            </div>
+            <div class="inline form-group">
+              <label for="studentFirstName" class="lastName">Last Name</label>
+              <input type="text" name="lastName" id="studentLastName" class="required" size="" placeholder="" required>
+            </div>
+            <div class="inline form-group sex">
+              <input type="radio" name="gender" id="sexMale" value="M" required>
+              <label for="sexMale" class="male">Male</label>
+            </div>
+            <div class="inline form-group sex">
+              <input type="radio" name="gender" id="sexFemale" value="F" required>
+              <label for="sexFemale" class="female">Female</label>
+            </div>
+            <br />
+            
+            <div class="inline form-group">
+              <label class="dob" for="dobMonth">Date of Birth</label>
+              <select id="dobMonth" name="dobMonth" class="required" form="enrollmentForm" required>
+                <option class="month" value="" style="display:none" selected disabled="disabled">Month</option>
+                <option class="jan" value="01">January</option>
+                <option class="feb" value="02">February</option>
+                <option class="mar" value="03">March</option>
+                <option class="apr" value="04">April</option>
+                <option class="may" value="05">May</option>
+                <option class="jun" value="06">June</option>
+                <option class="jul" value="07">July</option>
+                <option class="aug" value="08">August</option>
+                <option class="sep" value="09">September</option>
+                <option class="oct" value="10">October</option>
+                <option class="nov" value="11">November</option>
+                <option class="dec" value="12">December</option>
+              </select>
+             </div>
+             
+             <select id="dobDay" name="dobDay" class="required" form="enrollmentForm" required></select>
+             <select id="dobYear" name = "dobYear" class="required" form="enrollmentForm" required></select>
+
+            <br />
+            
+            
+            <div class="inline form-group">
+              <label for="programSite"></label>
+              <select id="programSite" name="programSite" class="required" form="enrollmentForm" required>
+              </select>
+            </div>
+            <div class="inline form-group">
+              <label for="instrument"></label>
+              <select id="instrument" name="instrument" form="enrollmentForm"></select>
+            </div>
+            <div class="inline form-group">
+              <label for="instrumentSerialNo" class="instrumentSerialNo">Instrument Serial #</label>
+              <input type="text" name="instrumentSerialNo" class="" placeholder="">
+            </div>
+            <br />
+            
+            
+            <div class="inline form-group">
+              <label for="studentLanguage" class="language">Language of Preference</label>
+              <select id="studentLanguage" class="required languageSelect" name="studentLanguage" required></select>
+           
+            </div>
+            <div class="subSection grey">
+              <h4 id="ethnicityHeader">Please check the ethnicity that best describes the child</h4>
+              <p id="ethnicityDescription">(this information will ONLY be used for statistical purposes. It will NOT be used as a basis for admission or any other discriminatory manner)</p>
+              
+              <table>
+                <tr>
+                  <td>
+                    <input type="radio" name="ethnicity" value="Latino" id="latino" required>
+                    <label for="latino" class="latino" id="studentEthnicityLatino">Latina/o</label>
+                  </td>
+                  <td>
+                    <input type="radio" name="ethnicity" value="African American" id="africanAmerican" required>
+                    <label for="africanAmerican" class="africanAmerican" id="studentEthnicityAfricanAmerican">African-American or Black</label>
+                  </td>
+                  <td>
+                    <input type="radio" name="ethnicity" value="Asian" id="asian" required>
+                    <label for="asian" class="asian" id="studentEthnicityAsian">Asian</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="radio" name="ethnicity" value="Pacific Islander" id="pacificIslander" required>
+                    <label for="pacificIslander" class="pacificIslander" id="studentEthnicityPacificIslander">Pacific Islander</label>
+                  </td>
+                  <td>
+                    <input type="radio" name="ethnicity" value="White" id="ethWhite" required>
+                    <label for="ethWhite" class="caucasian" id="studentEthnicityWhite">Caucasian or White</label>
+                  </td>
+                  <td>
+                    <input type="radio" name="ethnicity" value="Native American" id="nativeAmerican" required>
+                    <label for="nativeAmerican" class="nativeAmerican" id="studentEthnicityNativeAmerican">Native American</label>
+                  </td>
+                  
+                </tr>
+                <tr>
+                <td>
+                    <input type="radio" name="ethnicity" value="Multi-Racial" id="multiRacial" required>
+                    <label for="multiRacial" class="multiRacial" id="studentEthnicityMultiRacial">Multi-Racial</label>
+                  </td>
+                <td>
+                    <input type="radio" name="ethnicity" value="Other" id="ethOther" required>
+                    <input type="text" id="studentEthnicityOther" name="ethnicityOther" class="otherSpecify" placeholder="Other (please specify)" >
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="subSection">
+              <div class="inline form-group">
+                <label for="studentCellPhone" class="studentCellPhone">Student Cell Phone #</label>
+                <input type="tel" name="studentCellPhone" size="30" id="studentCellPhone" placeholder="ex: (555) 555-1234" >
+              </div>
+              <div class="inline form-group">
+                <label for="studentEmail" class="studentEmail">Student Email</label>
+                <input type="email" name="studentEmail" size="30" id="studentEmail" placeholder="" >
+              </div>
+              <br />
+              <div class="inline form-group" id="schoolDiv">
+                  <select id="studentSchool" name="studentSchool" class="required" form="enrollmentForm" style="width:200px" required></select>
+                  
+              </div>
+             
+               <div class="inline form-group">
+                  <label for="studentGrade">  </label><br>
+                  <select id="studentGrade" name="studentGrade" class="required" form="enrollmentForm" required></select>
+              </div>
+              <br>
+               <div class="inline form-group">
+                  <label id="studentSchoolWriteInLabel" for="studentSchoolWriteIn" class='studentSchool' style="display:none">School (Attending in the fall)</label>
+                  <input type="text" id='studentSchoolWriteIn' name="studentSchoolWriteIn" class='studentSchool' size="75" style="display:none" name=''>
+              </div>
+              <br>
+              
+              <div class="inline form-group">
+                <label for="studentOtherActivities" class="studentOtherActivities">Other after-school activities or clubs in which your child is currently involved</label>
+                <input type="text" id="studentOtherActivities" name="studentOtherActivities" size="75" placeholder="">
+              </div>
+              
+              <!-- removed living arrangement question
+              <h4 id="livingArrangement">Student's Living Arrangement</h4>
+              <input type="radio" name="livingArrangement" value="With Parents" id="withParents">
+              <label for="withParents" id="livingWithParents" class="living">Living With Parents</label>
+              <input type="radio" name="livingArrangement" value="Foster Care" id="fosterCare">
+              <label for="fosterCare" id="livingFosterCare" class="living">Foster Care/Parents</label>
+              <input type="radio" name="livingArrangement" value="By Self" id="bySelf">
+              <label for="bySelf" id="livingBySelf" class="living">By self</label>
+              <input type="radio" name="livingArrangement" value="Other" id="livingOther">
+              <input type="text" id="livingOtherInput" name="livingArrangementOther" class="otherSpecify" placeholder="Other (please specify)">
+              -->
+              
+          </div>
+       </div>
+       <!-- end Student Info -->
+       
+       <!-- begin Parent 1 Info -->
+       <div class="formSection">
+         <h2 id="parent1Title" class="parent blue banner">☎ Parent/Guardian #1</h2>
+           <div class="inline form-group">
+             <label for="parent1FirstName" class="firstName">First Name</label>
+             <input type="text" name="parent1FirstName" id="parent1FirstName" class="required" required placeholder="">
+           </div>
+           <div class="inline form-group"> 
+             <label for="parent1LastName" class="lastName">Last Name</label>
+             <input type="text" name="parent1LastName" id="parent1LastName" class="required" required placeholder="">    
+           </div>
+           
+           <br>
+           
+           <div class="inline form-group">
+             <label for="parent1Address" class="address">Street Address</label>
+             <input type="text" id="parent1Address"  class="required" required name="parent1Address" size="60" placeholder="">
+           </div>
+           <div class="inline form-group">
+             <label for="parent1AptNo" class="apt">Apt. #</label>
+             <input type="text" id="parent1AptNo" class="" size="2" name="parent1AptNo" placeholder="">
+           </div>
+           <br>
+           
+           <div class="inline form-group">
+             <label for="parent1City" class="city">City</label>
+             <input type="text"  class="required" required id="parent1City" name="parent1City" placeholder="">
+           </div>
+           <div class="inline form-group">
+             <label for="parent1State" class="state">State</label>
+             <input type="text" id="parent1State"  class="required" required name="parent1State" placeholder="">
+           </div>
+           <div class="inline form-group">
+             <label for="parent1Zip" class="zip">Zip Code</label>
+             <input type="number"  class="required" required id="parent1Zip" name="parent1Zip" placeholder="">
+           </div>
+           <br>
+           
+           <div class="inline form-group">
+             <label for="parent1HomePhone" class="homePhone">Home Phone</label>
+             <input type="tel" id="parent1HomePhone" class="" name="parent1HomePhone" placeholder="ex: (555) 555-1234">
+           </div>
+           <div class="inline form-group">
+             <label for="parent1CellPhone" class="cellPhone">Cell Phone</label>
+             <input type="tel" id="parent1CellPhone" class="" name="parent1CellPhone" placeholder="">
+           </div>
+         <br>
+         
+           <div class="inline form-group">
+             <label for="parent1Email" class="email">Email</label>
+             <input type="email" class="" name="parent1Email" id="parent1Email" placeholder="">
+           </div>
+           <div class="inline form-group">
+             <label for="parent1Language" class="language">Language of Preference</label>
+             <select id="parent1Language" name="parent1Language" class="required languageSelect" required></select>
+           </div>
+           <br>
+           
+           <div class="communicateEnglishDiv">
+             <span class="communicateEnglish inlineRadio">Do you feel comfortable communicating in English?</span>
+             <input class="inlineRadio" type="radio" id="parent1EnglishYes" name="parent1English" value="Yes">
+             <label class="inlineRadio yes" for="parent1EnglishYes">Yes</label>
+             <input class="inlineRadio" type="radio" id="parent1EnglishNo" name="parent1English" value="No">
+             <label class="inlineRadio no" for="parent1EnglishNo">No</label>
+           </div>
+           
+           <div class="subSection grey">
+           
+             <h4 class="bestTimeToContact">Best Time to Contact</h4>
+             <p id="parent1BestTimeDescription" class="checkAllThatApply">(check all that apply)</p>
+             <div class="weekdayDiv days">
+               <input type="checkbox" name="parent1ContactDay" value="Mon" id="parent1Mon">
+               <label for="parent1Mon" class="mon weekdayBox">Mon</label>
+               <input type="checkbox" name="parent1ContactDay" value="Tue" id="parent1Tue">
+               <label for="parent1Tue" class="tue weekdayBox">Tue</label>
+               <input type="checkbox" name="parent1ContactDay" value="Wed" id="parent1Wed">
+               <label for="parent1Wed" class="wed weekdayBox">Wed</label>
+               <input type="checkbox" name="parent1ContactDay" value="Thu" id="parent1Thu">
+               <label for="parent1Thu" class="thu weekdayBox">Thu</label>
+               <input type="checkbox" name="parent1ContactDay" value="Fri" id="parent1Fri">
+               <label for="parent1Fri" class="fri weekdayBox">Fri</label>
+               <input type="checkbox" name="parent1ContactDay" value="Sat" id="parent1Sat">
+               <label for="parent1Sat" class="sat weekdayBox">Sat</label>
+               <input type="checkbox" name="parent1ContactDay" value="Sun" id="parent1Sun">
+               <label for="parent1Sun" class="sun weekdayBox">Sun</label>
+             </div>
+             <div class="weekdayDiv times">
+               <input type="checkbox" name="parent1ContactTime" value="Morning" id="parent1Morning">
+               <label for="parent1Morning" class="morning weekdayBox">Morning</label>
+               <input type="checkbox" name="parent1ContactTime" value="Afternoon" id="parent1Afternoon">
+               <label for="parent1Afternoon" class="afternoon weekdayBox">Afternoon</label>
+               <input type="checkbox" name="parent1ContactTime" value="Evening" id="parent1Evening">
+               <label for="parent1Evening" class="evening weekdayBox">Evening</label>
+             </div>
+           </div>
+       </div>
+       <!-- end Parent 1 Info -->
+       
+       <!-- begin Parent 2 Info -->
+       <div class="formSection">
+         <h2 id="parent2Title" class="parent blue banner">☎ Parent/Guardian #2</h2>
+         <div class="inline form-group">
+           <label for="parent2FirstName" class="firstName">First Name</label>
+           <input type="text" id="parent2FirstName" name="parent2FirstName" class="" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="parent2LastName" class="lastName">Last Name</label>
+           <input type="text" id="parent2LastName" name="parent2LastName" class="" placeholder="">    
+         </div>  
+         <br>
+           
+         <div class="inline form-group">
+           <label for="parent2Address" class="address">Street Address</label>
+           <input type="text" id="parent2Address" class="leaveBlankAddress" name="parent2Address" size="60" placeholder="Leave blank if same as Parent #1">
+         </div>
+         <div class="inline form-group">
+           <label for="parent2AptNo" class="apt">Apt. #</label>
+           <input type="text" id="parent2AptNo" class="" name="parent2AptNo" size="2" placeholder="">
+         </div>
+         <br>
+         
+         <div class="inline form-group">
+           <label for="parent2City" class="city">City</label>
+           <input type="text" id="parent2City" class="" name="parent2City" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="parent2State" class="state">State</label>
+           <input type="text" id="parent2State" class="" name="parent2State" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="parent2Zip" class="zip">Zip Code</label>
+           <input type="number" class="" name="parent2Zip" placeholder="">
+         </div>
+         <br>
+           
+         <div class="inline form-group">
+           <label for="parent2HomePhone" class="homePhone">Home Phone</label>
+           <input type="tel" id="parent2HomePhone" class="" name="parent2HomePhone" placeholder="ex: (555) 555-1234">
+         </div>
+         <div class="inline form-group">
+           <label for="parent2CellPhone" class="cellPhone">Cell Phone</label>
+           <input type="tel" id="parent2CellPhone" class="" name="parent2CellPhone" placeholder="">
+         </div>
+         <br>
+         
+         <div class="inline form-group">
+           <label for="parent2Email" class="email">Email</label>
+           <input type="email" id="parent2Email" class="" name="parent2Email" placeholder="">
+         </div>
+         
+         <div class="inline form-group">
+           <label for="parent2Language" class="language">Language of Preference</label>
+           <select id="parent2Language" name="parent2Language" class="languageSelect"></select>
+         </div>
+         
+         <div class="communicateEnglishDiv">
+             <span class="communicateEnglish inlineRadio">Do you feel comfortable communicating in English?</span>
+             <input class="inlineRadio" type="radio" id="parent2EnglishYes" name="parent2English" value="Yes">
+             <label class="inlineRadio yes" for="parent2EnglishYes">Yes</label>
+             <input class="inlineRadio" type="radio" id="parent2EnglishNo" name="parent2English" value="No">
+             <label class="inlineRadio no" for="parent2EnglishNo">No</label>
+         </div>
+           
+           <div class="subSection grey">
+             <h4 class="bestTimeToContact">Best Time to Contact</h4>
+             <p class="checkAllThatApply">(check all that apply)</p>
+             <div class="weekdayDiv">
+               <input type="checkbox" name="parent2ContactDay" value="Mon" id="parent2Mon">
+               <label for="parent2Mon" class="mon weekdayBox">Mon</label>
+               <input type="checkbox" name="parent2ContactDay" value="Tue" id="parent2Tue">
+               <label for="parent2Tue" class="tue weekdayBox">Tue</label>
+               <input type="checkbox" name="parent2ContactDay" value="Wed" id="parent2Wed">
+               <label for="parent2Wed" class="wed weekdayBox">Wed</label>
+               <input type="checkbox" name="parent2ContactDay" value="Thu" id="parent2Thu">
+               <label for="parent2The" class="thu weekdayBox">Thu</label>
+               <input type="checkbox" name="parent2ContactDay" value="Fri" id="parent2Fri">
+               <label for="parent2Fri" class="fri weekdayBox">Fri</label>
+               <input type="checkbox" name="parent2ContactDay" value="Sat" id="parent2Sat">
+               <label for="parent2Sat" class="sat weekdayBox">Sat</label>
+               <input type="checkbox" name="parent2ContactDay" value="Sun" id="parent2Sun">
+               <label for="parent2Sun" class="sun weekdayBox">Sun</label>
+             </div>
+             <div class="weekdayDiv times">
+               <input type="checkbox" name="parent2ContactTime" value="Morning" id="parent2Morning">
+               <label for="parent2Morning" class="morning weekdayBox">Morning</label>
+               <input type="checkbox" name="parent2ContactTime" value="Afternoon" id="parent2Afternoon">
+               <label for="parent2Afternoon" class="afternoon weekdayBox">Afternoon</label>
+               <input type="checkbox" name="parent2ContactTime" value="Evening" id="parent2Evening">
+               <label for="parent2Evening" class="evening weekdayBox">Evening</label>
+             </div>
+           </div>
+       </div>
+       <!-- End Parent 2 Info -->
+       
+       <!-- Begin Mailing Info -->
+       <div class="formSection">
+         <div class="subSection">
+           <h3 id="sendMailingsToLabel">Send <em>mailings</em> to:</h3>
+           <p class="checkAllThatApply">(check all that apply)</p>
+           <input type="checkbox" name="sendMailingsTo" value="Parent #1" id="parent1SendMailingsToBox">
+           <label for="parent1SendMailingsToBox" class="parent1 sendMailingsLabel">Parent/Guardian #1</label>
+           <input type="checkbox" name="sendMailingsTo" value="Parent #2" id="parent2SendMailingsToBox">
+           <label for="parent2SendMailingsToBox" class="parent2 sendMailingsLabel">Parent/Guardian #2</label>
+         </div>
+       </div>
+       <!-- End Mailing Info -->
+       
+       <!-- Begin Emergency Info -->
+       <div class="formSection">
+         <h2 class="red banner" id="emergencyTitle">✚ Emergency Information</h2>
+         <div class="subSection grey">
+           <div class="inline form-group">
+             <label for="emergencyContact1Name" class="emergencyContact1Name">Emergency Contact #1 (other than parent)</label>
+             <input type="text" name="emergencyContact1Name" id="emergencyContact1Name" size="60"  class="required" required placeholder="">
+           </div>
+           <br />
+           <div class="inline form-group">
+             <label for="emergencyContact1HomePhone" class="homePhone">Home Phone</label>
+             <input type="tel" id="emergencyContact1HomePhone" name="emergencyContact1HomePhone" size="15" class="" placeHolder="ex: (555) 555-1234">
+           </div>
+           <div class="inline form-group">
+             <label for="emergencyContact1CellPhone" class="cellPhone">Cell Phone</label>
+             <input type="tel" id="emergencyContact1CellPhone" name="emergencyContact1CellPhone" size="15" class="" placeHolder="">
+           </div>
+           <div class="inline form-group">
+             <label for="emergencyContact1WorkPhone" class="workPhone">Work Phone</label>
+             <input type="tel" id="emergencyContact1WorkPhone" name="emergencyContact1WorkPhone" size="15" class="" placeHolder="">
+           </div>
+         </div>
+         <div class="subSection grey">
+           <div class="inline form-group">
+             <label for="emergencyContact2Name" class="emergencyContact2Name">Emergency Contact #2 (other than parent)</label>
+             <input type="text" name="emergencyContact2Name" id="emergencyContact2Name" size="60" placeholder="">
+           </div>
+           <br />
+           <div class="inline form-group">
+             <label for="emergencyContact2HomePhone" class="homePhone">Home Phone</label>
+             <input type="tel" id="emergencyContact2HomePhone" name="emergencyContact2HomePhone" size="15" class="" placeHolder="ex: (555) 555-1234">
+           </div>
+            <div class="inline form-group">
+             <label for="emergencyContact2CellPhone" class="cellPhone">Cell Phone</label>
+             <input type="tel" id="emergencyContact2CellPhone" name="emergencyContact2CellPhone" size="15" class="" placeHolder="">
+           </div>
+           <div class="inline form-group">
+             <label for="emergencyContact2WorkPhone" class="workPhone">Work Phone</label>
+             <input type="tel" id="emergencyContact2WorkPhone" name="emergencyContact2WorkPhone" size="15" class="" placeHolder="">
+           </div>
+         </div>
+         <div class="inline form-group">
+           <label for="medicalPlan" class="medicalPlan">Participant's Medical Plan</label>
+           <input type="text" name="medicalPlan" id="medicalPlan" size="30" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="insuranceNo" class="insuranceNo">Insurance #</label>
+           <input type="text" name="insuranceNo" id="insuranceNo" placeholder="">
+         </div>
+         <br />
+         
+         <div class="inline form-group">
+           <label for="physician" class="physician">Physician</label>
+           <input type="text" name="physician" id="physician" size="30" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="physicianPhone" class="phone">Phone Number</label>
+           <input type="tel" id="physicianPhone" name="physicianPhone" class="" placeholder="">
+         </div>
+         <br />
+         
+         <div class="inline form-group">
+           <label for="dentist" class="dentist">Dentist</label>
+           <input type="text" name="dentist" id="dentist" size="30" placeholder="">
+         </div>
+         <div class="inline form-group">
+           <label for="dentistPhone" class="phone">Phone Number</label>
+           <input type="tel" id="dentistPhone" name="dentistPhone" class="" placeholder="">
+         </div>
+         <div class="subSection">
+           <p id="medicalDisclaimer">The following information will not be used as a basis for admission or any other discriminatory manner.</p>
+           <h4 id="physicalMedicalNeeds">Please indicate if the student has any physical or medical needs</h4>
+           <input type="checkbox" name="medicalNeeds" id="medicalNoneBox" value="none">
+           <label for="medicalNoneBox" class="none">None</label>
+           <input type="checkbox" name="medicalNeeds" id="medicalUnknownBox" value="unknown">
+           <label for="medicalUnknownBox" class="unknown">Unknown</label>
+           <input type="checkbox" name="medicalNeeds" id="medicalBrainInjuryBox" value="traumatic brain injury">
+           <label for="medicalBrainInjuryBox" id="brainInjury">Traumatic Brain Injury</label>
+           <input type="checkbox" name="medicalNeeds" id="medicalVisualImpairmentBox" value="visual impairment">
+           <label for="medicalVisualImpairmentBox" id="visualImpairment">Visual Impairment</label>
+           <input type="checkbox" name="medicalNeeds" id="medicalDevelopmentalBox" value="developmental">
+           <label for="medicalDevelopmentalBox" id="developmental">Developmental</label>
+           <br>
+           <br>
+           
+           <input type="checkbox" name="medicalNeeds" value="allergies" class="allergiesBox" id="allergiesBox">
+           <input type="text" id="otherAllergies" name="otherAllergies" placeholder="Allergies (please list)" size="60">
+           <br>
+           <br>
+           
+           <input type="checkbox" name="medicalNeeds" value="medications" class="medsBox" id="medsBox">
+           <input type="text" id="otherMeds" name="otherMeds" placeholder="Medications (please list)" size="60">
+           <br>
+           <br>
+           
+           <input type="checkbox" name="medicalNeeds" id="medicalOtherBox" value="other">
+           <input type="text" name="medicalNeedsOther" id="medicalNeedsOther" class="otherSpecify" size="60" placeholder="Other (please specify)">
+           <br>
+           
+           <!-- REMOVED PAST COUNSELING
+           <h4 id="counselingPastDescription">Has the student recieved counseling or emotional support in the past?</h4>
+           <select name="counselingPast" id="counselingPast" class="required" required>
+             <option class="selectOne" value="" style="display:none" selected disabled="disabled">Select</option>
+             <option value="no" class="no">No</option>
+             <option value="yes" class="yes">Yes</option>
+             <option value="unknown" class="unknown">Unknown</option>
+           </select>
+           <input type="text" name="counselingPastSpecify" id="counselingPastSpecify" class="specify" size="60" style="display:none" placeholder="Please Specify">
+           -->
+           
+           <h4 id="iepDescription">Does the student have an IEP?</h4>
+           <select name="iep" id="iep" class="required" required>
+             <option class="selectOne" value="" style="display:none" selected disabled="disabled">Select</option>
+             <option value="no" class="no">No</option>
+             <option value="yes" class="yes">Yes</option>
+           </select>
+           <input type="text" name="iepSpecify" id="iepSpecify" class="describeReason" size="60" style="display:none" placeholder="Describe the reason/diagnosis">
+           
+           <h4 id="counselingCurrentDescription">Is the student currently receiving counseling or emotional support?</h4>
+           <select name="counselingCurrent" id="counselingCurrent" class="required" required>
+             <option class="selectOne" value="" style="display:none" selected disabled="disabled">Select</option>
+             <option value="no" class="no">No</option>
+             <option value="yes" class="yes">Yes</option>
+           </select>
+           <input type="text" name="counselingCurrentSpecify" id="counselingCurrentSpecify" class="describeReason" size="60" style="display:none" placeholder="Describe the reason/diagnosis">
+           
+           <h4 id="aspirinTylenolDescription">May your child be given the following if needed?</h4>
+           <label for="aspirinTylenolSelect" id="aspirinTylenol" class="aspirinTylenol">Aspirin or Tylenol</label>
+           <select name="aspirinTylenol" id="aspirinTylenolSelect" class="required" required>
+             <option class="selectOne" value="" style="display:none" selected disabled="disabled">Select</option>
+             <option value="yes" class="yes">Yes</option>
+             <option value="no" class="no">No</option>
+             
+           </select>
+           
+           <label for="benadrylSelect" id="benadryl">Benadryl</label>
+           <select name="benadryl" id="benadrylSelect" class="required" required>
+             <option class="selectOne " style="display:none" value="" selected disabled="disabled">Select</option>
+             <option value="yes" class="yes">Yes</option>
+             <option value="no" class="no">No</option>
+             
+           </select>
+           <br />
+           
+           <div class="subSection grey" id="diseaseDiv">
+             <h4 id="diseaseDescription">Has your child had any of the following?</h4>
+             <table>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="disease" value="chicken pox" class="chickenpoxBox">
+                      <label for="chickenpoxBox" class="chickenpox">Chicken pox</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="mumps" class="mumpsBox">
+                      <label for="mumpsBox" class="mumps">Mumps</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="colds" class="coldsBox">
+                      <label for="coldsBox" class="colds">Colds</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="measels" class="measelsBox">
+                      <label for="measelsBox" class="measels">Measels</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="disease" value="sinus trouble" class="sinusBox">
+                      <label for="sinusBox" class="sinus">Sinus trouble</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="headaches" class="headachesBox">
+                      <label for="headachesBox" class="headaches">Headaches</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="ear infections" class="earInfectionsBox">
+                      <label for="earInfectionsBox" class="earInfections">Ear Infections</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="german measels" class="germanMeaselsBox">
+                      <label for="germanMeaselsBox" class="germanMeasels">German Measels</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="disease" value="fainting" class="faintingBox">
+                      <label for="faintingBox" class="fainting">Fainting</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="rheumatic fever" class="rheumaticBox">
+                      <label for="rheumaticBox" class="rheumaticFever">Rheumatic Fever</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="tonsilitis" class="tonsilitisBox">
+                      <label for="tonsilitisBox" class="tonsilitis">Tonsilitis</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="constipation" class="constipationBox">
+                      <label for="constipationBox" class="constipation">Constipation</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="disease" value="scarlet fever" class="scarletFeverBox">
+                      <label for="scarletFeverBox" class="scarletFever">Scarlet Fever</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="appendicitis" class="appendicitisBox">
+                      <label for="appendicitisBox" class="appendicitis">Apendicitis</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="stomach upset" class="stomachUpsetBox">
+                      <label for="stomachUpsetBox" class="stomachUpset">Stomach upset</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="diphtheria" class="diphtheriaBox">
+                      <label for="diphtheriaBox" class="diphtheria">Diphtheria</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="disease" value="asthma" class="asthmaBox">
+                      <label for="asthmaBox" class="asthma">Asthma</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="skin rash" class="skinRashBox">
+                      <label for="skinRashBox" class="skinRash">Skin Rash</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="heart trouble" class="heartTroubleBox">
+                      <label for="heartTroubleBox" class="heartTrouble">Heart Trouble</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="disease" value="hay fever" class="hayFeverBox">
+                      <label for="hayFeverBox" class="hayFever">Hay Fever</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    
+                    <td>
+                      <input type="checkbox" name="disease" value="nosebleed" class="nosebleedBox">
+                      <label for="nosebleedBox" class="nosebleed">Nosebleed</label>
+                    </td>
+                    <td colspan="2">
+                      
+                    </td>
+                   
+               
+                 
+                  </tr>
+                  
+                </table>
+           </div>
+           <br />
+           <p id="immunizationDescription">List <strong>year</strong> of last immunization or booster</p>
+           <div>
+             <div class="inline form-group">
+               <label for="tdapYear" class="tdap">DTaP/DT/Tdap (5)</label>
+               <input type="number" id="tdapYear" name="tdapYear" class="" placeholder="ex: 2014">
+             </div>
+             <div class="inline form-group">
+               <label for="hepBYear" class="hepB">HepB (3)</label>
+               <input type="number" id="hepBYear" name="hepBYear" class="" placeholder="">
+             </div>
+             <br>
+             
+             <div class="inline form-group">
+               <label for="ipvYear" class="ipv">IPV/OPV (4)</label>
+               <input type="number" id="ipvYear" name="ipvYear" class="" placeholder="">
+             </div>
+            <div class="inline form-group">
+               <label for="mmrYear" class="mmr">MMR (2)</label>
+               <input type="number" id="mmrYear" name="mmrYear" class="" placeholder="">
+             </div>
+             
+             <br>
+             
+             
+             <div class="inline form-group">
+               <label for="varicellaYear" class="varicella">Varicella (1-2)</label>
+               <input type="number" id="varicellaYear" name="varicellaYear" class="" placeholder="">
+             </div>
+             <br>
+           </div>
+           <h4 id="medicalAuthorization">Medical Authorization</h4>
+           <p id="medicalAuthorizationDescription">Should it be necessary for the student, parent(s), and/or guardian listed above to receive medical care while participating with Harmony Project and/or any activities with which it is affiliated, I/we hereby give Harmony Project personnel permission to use their judgement in obtaining that care. I/We also give permission to the physician selected by Harmony Project personnel to render medical care that s/he deems necessary and appropriate. I/We understand that Harmony Project has no insurance covering medical or hospital costs incurred by any participant and, therefore, any cost incurred for such treatment will be entirely my/our responsibility.</p>
+           <br />
+           <input type="checkbox" name="authorizationNameParent1Box" value="Parent #1 Agree" id="parent1AgreeBox" class="requiredBox" required>
+           <label for="parent1AgreeBox" class="agree">I Agree</label>
+           <input type="text" name="authorizationNameParent1" class="parent1 required" size="30" placeholder="Parent/Guardian #1" required>
+           <br />
+           
+           <input type="checkbox" name="authorizationNameParent2Box" value="Parent #2 Agree" id="parent2AgreeBox">
+           <label for="parent2AgreeBox" class="agree">I Agree</label>
+           <input type="text" name="authorizationNameParent2" class="parent2" size="30" placeholder="Parent/Guardian #2">
+         </div>
+       </div>
+       <!-- End Emergency Info -->
+      
+       
+       <!-- Begin Contracts -->
+       <div class="formSection">
+         <h2 class="orange banner" id="contractsHeader">✍ Policies & Contracts</h2>
+         <div class="subSection">
+           
+           <p id="contractsDescription">
+             Please read the following policies and contracts and check the corresponding box indicating that you have read, understand, and agree to their contents. Contracts will open in new tabs.
+           </p>
+           <br />
+           
+           <table>
+             <tr>
+             <td></td>
+             <td class="greyBg"><h4 class="parent">Parent</h4></td>
+             <td><h4 class="student">Student</h4></td>
+             <tr>
+             <tr>
+               <td>
+                 <a href="https://docs.google.com/document/d/1mm1nVXLhvFOlGhQgrMbUI0s_k6pfMraoCUqw2U9xiOg/edit?usp=sharing" class="instrumentCareContract" target="_blank">Instrument Care Contract</a>
+               </td>
+               <td class="greyBg">
+                 <input type="checkbox" name="instrumentContractParent" id="instrumentCareBoxParent" value="IC" class="requiredBox" required>
+                 <label for="instrumentCareBoxParent" class="agree">I Agree</label>
+               </td>
+               <td>
+                 <input type="checkbox" name="instrumentContractStudent" id="instrumentCareBoxStudent" value="IC" class="requiredBox" required>
+                 <label for="instrumentCareBoxStudent" class="agree">I Agree</label>
+               </td>
+             </tr>
+             <tr>
+               <td>
+                 <a href="https://docs.google.com/document/d/191As7RY902zBOBobJMwcX4k9PY4pbkiYoJZDWgozGuE/edit?usp=sharing" class="participationForm" target="_blank">Participation, Release, and Consent Form</a>
+               </td>
+               <td class="greyBg">
+                 <input type="checkbox" name="participationContractParent" id="participationBoxParent" value="PR&C" class="requiredBox" required>
+                 <label for="participationBoxParent" class="agree">I Agree</label>
+               </td>
+               <td>
+                 <input type="checkbox" name="participationContractStudent" id="participationBoxStudent" value="PR&C" class="requiredBox" required>
+                 <label for="participationBoxStudent" class="agree">I Agree</label>
+               </td>
+             </tr>
+             <tr>
+               <td>
+               <a href="https://docs.google.com/document/d/1zjtMEyZWEenRrYOqij3YMPK_45Ijv5LjFMJsVPjSuQM/edit?usp=sharing" class="dropOffPolicy" target="_blank">Drop-off and Pick-up Policy</a>
+               </td>
+               <td class="greyBg">
+                 <input type="checkbox" name="dropOffContractParent" id="dropOffBoxParent" value="DO&PU" class="requiredBox" required>
+                 <label for="dropOffBoxParent" class="agree">I Agree</label>
+               </td>
+               <td>
+                 <input type="checkbox" name="dropOffContractStudent" id="dropOffBoxStudent" value="DO&PU" class="requiredBox" required>
+                 <label for="dropOffBoxStudent" class="agree">I Agree</label>
+               </td>
+             </tr>
+             <tr>
+               <td>
+                 <a href="https://docs.google.com/document/d/1F2XKdmpESRMOb8C-ekF-R3fjwMdEqqklpoMtiqqO1Dw/edit?usp=sharing" class="attendancePolicy" target="_blank">Attendance Policy</a>
+               </td>
+               <td class="greyBg">
+                 <input type="checkbox" name="attendanceContractParent" id="attendanceBoxParent" value="Atnd" class="requiredBox" required>
+                 <label for="attendanceBoxParent" class="agree">I Agree</label>
+               </td>
+               <td>
+                 <input type="checkbox" name="attendanceContractStudent" id="attendanceBoxStudent" value="Atnd" class="requiredBox" required>
+                 <label for="attendanceBoxStudent" class="agree">I Agree</label>
+               </td>
+             </tr>
+              <tr>
+               <td>
+                 <a href="https://docs.google.com/document/d/1OS6K_TFPL9OadxvdACTuNam4iEQoh5oxWE0tcGXGZ2o/edit?usp=sharing" class="codeOfConduct" target="_blank">Code of Conduct</a>
+               </td>
+               <td class="greyBg">
+                 <input type="checkbox" name="conductContractParent" id="conductBoxParent" value="CC" class="requiredBox" required>
+                 <label for="conductBoxParent" class="agree">I Agree</label>
+               </td>
+               <td>
+                 <input type="checkbox" name="conductContractStudent" id="conductBoxStudent" value="CC" class="requiredBox" required>
+                 <label for="conductBoxStudent" class="agree">I Agree</label>
+               </td>
+             </tr>
+              <tr>
+               <td>
+               </td>
+               <td>
+               </td>
+             </tr>
+           </table>
+         </div>
+       </div>
+       
+       
+       <!-- End Contracts -->
+       
+       <!-- Begin File Upload -->
+       <div class="formSection">
+       <h2 class="cyan banner" id="uploadHeader">⇧ Upload Documents</h2>
+         <div class="subSection">
+         <p id="uploadDescription">Please upload PDFs or clear, readable photos of the following documents. If you do not have electronic versions, you may mail or drop off copies to:
+         </p>
+         <br>
+         
+         <address>
+         Harmony Project<br>
+         817 Vine St. Ste. 212<br>
+         Los Angeles, CA 90038
+         </address>
+         <br>
+             
+            <div class="subSection grey" id="uploadSection">
+              <h3 class="incomeVerification">Income Verification</h3>
+              <p id="incomeVerificationDescription">Please attach either a copy of the first page of your most recent tax return (1040 Form) <em>or</em> a letter from your child's school stating that he/she participates in the free or reduced price lunch program. We do not accept W-2 forms, 1099 forms, or check stubs.</p>
+              <br />
+              <label class="incomeVerification fileUploadLabel" for="incomeVerificationFile">Income Verification</label>
+              <input type="file" name="incomeVerificationFile">
+              <br />
+              
+              <h3 class="reportCard">Report Card</h3>
+              <p id="reportCardDescription">Please attach a copy of a recent report card or progress report received by your child.</p>
+              <br />
+              
+              <label class="reportCard fileUploadLabel" for="reportCardFile">Report Card</label>
+              <input type="file" name="reportCardFile">
+            </div>
+            <br />
+          </div>
+        </div>
+        <!-- End File Upload -->
+  
+        <input type="button" class="action" id="submitButton" value="Upload All Files And Submit Form" onclick="submitMe(this.parentNode)">
+    </form>
+  </div>
+  
+  
+  
+  
+<!-- Include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<!-- Include SweetAlert for custom alert dialogs -->
+<script src="https://91c55625718363594154e49f236374eb2534752b.googledrive.com/host/0B5AyXtIwimFRbVdJZWt0OFoyOUU/sweetalert.min.js"></script>
+
+
+<script>
+var translations;
+
+// Change language of form based on dropdown menu
+function changeLanguage(languageString) {
+                 
+    var language;
+    
+    // set array index to the language we want. 0=english 1=spanish. future languages can be added in additional indices 
+    switch (languageString) {
+      case "english":
+        language = 0;
+        $('#submitButton').val("Upload All Files And Submit Form");
+        break;
+      
+      case "spanish":
+        language = 1;
+        $('#submitButton').val("Subir Todos Los Archivos y Enviar La Forma");
+        break;
+       
+      default:
+        language = 0;
+        $('#submitButton').val("Upload All Files And Submit Form");
+    }
+    
+    
+    var key;
+    for (key in translations) {
+      $(key).attr("placeholder", translations[key][language]);
+      $(key).html(translations[key][language]);
+    }
+    
+}
+    
+
+
+// Submit the form
+function submitMe(form) {
+
+  changeSubmitText('uploading');
+  var allgood = true;
+  var firstError;
+  
+  // Check all required text fields for input
+  
+    $(".required").each(function() {
+    if ($( this ).val() == null || $( this ).val().length == 0) {
+       if (allgood) {
+         firstError = this;
+         allgood = false;
+       }
+      $( this ).addClass("inputError"); 
+    } else if ($( this ).hasClass("inputError")) {
+      $( this ).removeClass("inputError");
+    }
+  });
+  
+  $(".requiredBox").each(function() {
+    if (!$( this ).prop("checked")) {
+      if (allgood) {
+         firstError = this;
+         allgood = false;
+       }
+      $( this ).addClass("inputError");
+    }
+  });
+  
+  
+ if (allgood == true) {
+    google.script.run.withSuccessHandler(onSuccess).uploadFiles(form);
+  } else {
+    var language = $('#languageSelect').val();
+    switch (language) {
+      case "english":
+        swal({    title: "Something's Missing!",
+                  text: "It looks like we're missing some info. Please fill out all required fields and checkboxes",   
+                  type: "error",   
+                  confirmButtonText: "OK"}, 
+                  function() {
+                    $('html, body').animate({ scrollTop: $(firstError).offset().top - 30}, 500);
+                   });
+        break;
+        
+      case "spanish":
+        swal({   title: "Algo Faltó",   
+                 text: "Nos falta un poco de información.  Por favor conteste todas las preguntas y opciones requeridas.",   
+                 type: "error",   
+                 confirmButtonText: "OK"}, 
+                 function() {
+                    $('html, body').animate({ scrollTop: $(firstError).offset().top - 30}, 500);
+                  });
+        break;
+        
+      default:
+        swal({    title: "Something's Missing!",
+                  text: "It looks like we're missing some info. Please fill out all required fields and checkboxes",   
+                  type: "error",   
+                  confirmButtonText: "OK"}, 
+                  function() {
+                    $('html, body').animate({ scrollTop: $(firstError).offset().top - 30}, 500);
+                  });
+    
+    }
+    
+    changeSubmitText('revert');
+  }
+}
+
+
+
+// Hide form when it's been sucessfully submitted
+function onSuccess(response) {
+  if (response) { 
+    $('#callToAction').css("display","block");
+    $('#enrollmentForm').css("display", "none");
+    
+  } else {
+    swal({   title: "Whoops!",   text: "Something went wrong. Please make sure all fields are filled out and submit the form again.",   type: "error",   confirmButtonText: "OK" });
+    changeSubmitText('revert');
+  } 
+}
+
+
+
+// Change the text on the submit button to reflect current state & language
+function changeSubmitText(status) {
+  var language = $('#languageSelect').val();
+  
+  
+  switch (status) {
+  
+    case "uploading":
+      switch (language) {
+        case "english":
+          $('#submitButton').attr('value','Submitting…');
+          break;
+          
+        case "spanish":
+          $('#submitButton').attr('value','Enviando…');
+          break;
+          
+        default:
+          $('#submitButton').attr('value','Submitting…');
+          
+      }
+      
+      break;
+  
+    case "revert":
+      switch (language) {
+        case "english":
+          $('#submitButton').attr('value','Upload All Files And Submit Form');
+          break;
+          
+        case "spanish":
+          $('#submitButton').attr('value','Subir Todos Los Archivos y Enviar La Forma');
+          break;
+          
+        default:
+          $('#submitButton').attr('value','Upload All Files And Submit Form'); 
+      }
+      break;
+    
+     default:
+         $('#submitButton').attr('value','Upload All Files And Submit Form');
+  }
+}
+
+function populateTranslations(data) {
+  translations = data;
+}
+
+
+// This function is a success handler for a server call that collects validation values from the validation spreadsheet
+function populateValidation(data) {
+    // Load instruments
+    var instruments = data.instruments;
+    var schools = data.schools;
+    var programSites = data.programSites;
+    var grades = data.grades;
+    var languages = data.languages;
+    
+    
+    // Load instruments
+    var instrumentsHTML = "<option class='instrument' disabled selected>Instrument</option>";
+    for (var i = 0; i < instruments.length; i++) {
+        instrumentsHTML += "<option value='" + instruments[i] + "'>" + instruments[i] + "</option>";
+    }
+    $("#instrument").html(instrumentsHTML);
+    
+    
+    
+    // Load schools
+    var schoolHTML = "<option class='studentSchool' disabled selected>School (Attending in the fall)</option>";
+    for (var i = 0; i < schools.length; i++) {
+        schoolHTML += "<option value='" + schools[i] + "'>" + schools[i] + "</option>";
+    }
+    $("#studentSchool").html(schoolHTML);
+    
+    
+    // Load program sites
+    var programSiteHTML = "<option class='programSitePlaceholder' disabled selected>Program Site</option>";
+    for (var i = 0; i < programSites.length; i++) {
+        programSiteHTML += "<option value='" + programSites[i] + "'>" + programSites[i] + "</option>";
+    }
+    $("#programSite").html(programSiteHTML);
+    
+    // If EXPO ever uses this form, delete this line
+    $('#programSite option[value="EXPO"]').prop('disabled', true);
+    
+    
+    // Load grades
+    var gradeHTML = "<option class='studentGrade' selected disabled disabled='disabled'>Grade (In the fall)</option>";
+    for (var i = 0; i < grades.length; i++) {
+        gradeHTML += "<option value='" + grades[i] + "'>" + grades[i] + "</option>";
+    }
+    $('#studentGrade').html(gradeHTML);
+    
+    // Load languages
+    var languageHTML = "<option class='selectLanguageOption' selected disabled disabled='disabled'>Select Language</option>";
+    for (var i = 0; i < languages.length; i++) {
+        languageHTML += "<option value='" + languages[i] + "'>" + languages[i] + "</option>";
+    }
+    $('.languageSelect').html(languageHTML);
+    
+}
+
+
+// Link up text fields to their corresponding radio buttons and checkboxes
+$(document).ready(function(){
+
+
+    google.script.run.withSuccessHandler(populateValidation).getValidation();
+    google.script.run.withSuccessHandler(populateTranslations).getTranslation();
+    
+    // Load up initial values for select menus
+    // Load days of the month
+    var dobDayHTML = "<option class='day' disabled selected>Day</option>";
+    for (var i = 1; i <= 31; i++) {
+        dobDayHTML += "<option value=" + i + ">" + i + "</option>";
+    }
+    $("#dobDay").html(dobDayHTML);
+    
+    // Load years
+    var dobYearHTML = "<option class='year' disabled selected>Year</option>";
+    var currentYear = new Date().getFullYear();
+    // Allow up to 20-year-olds to submit
+    for (var i = currentYear - 2; i > currentYear - 25; i--) {
+        dobYearHTML += "<option value=" + i + ">" + i + "</option>";
+    }
+    $("#dobYear").html(dobYearHTML);
+    
+
+    
+
+    // Remove red outlines when user adds input values
+     $(".required").keyup(function() {
+      if ( $( this ).hasClass("inputError")) {
+        $( this ). removeClass("inputError");
+      }
+    });
+    
+    $(".requiredBox").on('change', function() {
+      if ( $( this ).hasClass("inputError")) {
+        $( this ). removeClass("inputError");
+      }
+    });
+    
+    $(".required").on('change', function() {
+      if ( $( this ).hasClass("inputError")) {
+        $( this ). removeClass("inputError");
+      }
+    });
+
+    
+    
+    // Display text input if 'other' is selected
+    $('#studentEthnicityOther').keyup(function() {
+    var input = document.getElementById('studentEthnicityOther');
+    if (input && input.value) {
+      $('#ethOther').prop('checked', true);
+    } else {
+      $('#ethOther').prop('checked', false);
+    }
+  });
+  
+  $('#livingOtherInput').keyup(function() {
+    var input = document.getElementById('livingOtherInput');
+    if (input && input.value) {
+      $('#livingOther').prop('checked', true);
+    } else {
+      $('#livingOther').prop('checked', false);
+    }
+  });
+  
+  /* REMOVED PAST COUNSELING
+  $('#counselingPast').change(function() {
+    var input = $('#counselingPast').val();
+    if (input == "yes") {
+      $('#counselingPastSpecify').css("display", "inline");
+    } else {
+      $('#counselingPastSpecify').css("display", "none");
+    }
+  });
+  */
+  
+  $('#counselingCurrent').change(function() {
+    var input = $('#counselingCurrent').val();
+    if (input == "yes") {
+      $('#counselingCurrentSpecify').css("display", "inline");
+    } else {
+      $('#counselingCurrentSpecify').css("display", "none");
+    }
+  });
+  
+  // Display text input if 'yes' is selected
+  $('#iep').change(function() {
+    var input = $('#iep').val();
+    if (input == "yes") {
+      $('#iepSpecify').css("display", "inline");
+    } else {
+      $('#iepSpecify').css("display", "none");
+    }
+  });
+  
+  // Check associated boxes if text is entered in 'other' fields
+  $('#medicalNeedsOther').keyup(function() {
+    var input = document.getElementById('medicalNeedsOther');
+    if (input && input.value) {
+      $('#medicalOtherBox').prop('checked', true);
+    } else {
+      $('#medicalOtherBox').prop('checked', false);
+    }
+  });
+  
+  $('#otherMeds').keyup(function() {
+    var input = document.getElementById('otherMeds');
+    if (input && input.value) {
+      $('#medsBox').prop('checked', true);
+    } else {
+      $('#medsBox').prop('checked', false);
+    }
+  });
+  
+    $('#otherAllergies').keyup(function() {
+    var input = document.getElementById('otherAllergies');
+    if (input && input.value) {
+      $('#allergiesBox').prop('checked', true);
+    } else {
+      $('#allergiesBox').prop('checked', false);
+    }
+  });
+  
+  
+  
+  // Display write-in text field & ignore select element if 'other' is selected
+  $('#studentSchool').change(function() {
+    var index = ($('#studentSchool').prop('selectedIndex'));
+    if (index == 1) {
+      // ignore id and name of dropdown
+      //$('#studentSchool').attr("name", "");
+      //$('#studentSchoolWriteIn').attr("name", "studentSchool");
+      $('#studentSchoolWriteIn').addClass('required');
+      
+      // append a text box for manual input if school isn't in list
+      $('#studentSchoolWriteIn').css('display', 'block');
+      $('#studentSchoolWriteInLabel').css('display', 'block');
+      
+    } else {
+      // delete input box if school is selected
+      //$('#studentSchool').attr("name", "studentSchool");
+      $('#studentSchoolWriteIn').css('display', 'none');
+      $('#studentSchoolInputWriteIn').css('display', 'none');
+      if ($('#studentSchoolWriteIn').hasClass('required')) {
+          $('#studentSchoolWriteIn').removeClass('required');
+      }
+    }
+  });
+  
+  // Load up form with english as default
+  changeLanguage("english");
+});
+</script>
+</body>
+</html>
